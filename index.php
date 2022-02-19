@@ -10,7 +10,7 @@
     $text = $result["message"]["text"]; //Текст сообщения
     $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
     $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
-    $keyboard = [["Последние статьи"],["Картинка"],["Гифка"]]; //Клавиатура
+    $keyboard = [["Price"],["Balance"]]; //Клавиатура
 
     if($text){
          if ($text == "/start") {
@@ -20,7 +20,7 @@
         }elseif ($text == "/help") {
             $reply = "Help info";
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-        }elseif ($text == "price") {
+        }elseif ($text == "Price") {
 			$response = json_decode($agora->send_cmd("", "sell-bitcoins-online/USD/cryptocurrency"));
 			$reply=$response->data->ad_list[0]->data->temp_price;
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
