@@ -17,3 +17,6 @@ $response = $telegram->getMe();
 $botId = $response->getId();
 $firstName = $response->getFirstName();
 $username = $response->getUsername();
+
+
+var_dump($response);
