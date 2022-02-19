@@ -4,15 +4,15 @@
 	require_once("func/function_agora.php");
     use Telegram\Bot\Api; 
 
-	//$agora = new Agora;
-   // $telegram = new Api('5100938458:AAH71g8P2ROvg21YwKK6VLJ_02FPuk9yILY'); //Устанавливаем токен, полученный у BotFather
-    //$result = '';//$telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
+	$agora = new Agora;
+    $telegram = new Api('5100938458:AAH71g8P2ROvg21YwKK6VLJ_02FPuk9yILY'); //Устанавливаем токен, полученный у BotFather
+    $result = $telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
     
 	//print_r($result);
-    $text = '/start';//$result["message"]["text"]; //Текст сообщения
-   // $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
-    //$name = $result["message"]["from"]["username"]; //Юзернейм пользователя
-    //$keyboard = [["Balance"], ["Wallet to pay"], ["Exchenge"]]; //Клавиатура
+    $text = $result["message"]["text"]; //Текст сообщения
+    $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
+    $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
+    $keyboard = [["Balance"], ["Wallet to pay"], ["Exchenge"]]; //Клавиатура
 
     if($text){
          if ($text == "/start") {
