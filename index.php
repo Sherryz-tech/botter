@@ -6,7 +6,7 @@
 
 	$agora = new Agora;
     $telegram = new Api('5100938458:AAH71g8P2ROvg21YwKK6VLJ_02FPuk9yILY'); //Устанавливаем токен, полученный у BotFather
-    $result = $telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
+    $result = '';//$telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
     
 	//print_r($result);
     $text = $result["message"]["text"]; //Текст сообщения
