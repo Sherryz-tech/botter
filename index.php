@@ -21,7 +21,7 @@
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
         }elseif ($text == "/help") {
             $reply = "Help info";
-            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => var_dump($result) ]);
         }elseif ($text == "Price") {
 			$response = json_decode($agora->send_cmd("", "sell-bitcoins-online/USD/cryptocurrency"));
 			$reply=$response->data->ad_list[0]->data->temp_price;
