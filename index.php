@@ -28,7 +28,7 @@
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
-        }elseif ($tex) == "Excange") {
+        }elseif ($text == "Excange") {
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;
             $telegram->sendChatAction([ 'chat_id' => $chat_id, 'action' => "typing"]);
