@@ -8,11 +8,11 @@ $text=$_GET['text'];
         }elseif ($text == "Price") {
         }elseif ($text == "Wallet to pay") {
         }elseif ($text == "Exchenge") {
-//            $answer = $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'How match?', 'reply_markup'=> $telegram->ForceReply(['force_reply' => true, 'selective'   => false])]);
-//			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "exchange ".$answer." BTC"]);
+            $answer = sendMessage([ 'chat_id' => $chat_id, 'text' => 'How match?', 'reply_markup'=> $telegram->ForceReply(['force_reply' => true, 'selective'   => false])]);
+			sendMessage([ 'chat_id' => $chat_id, 'text' => "exchange ".$answer." BTC"]);
 		}elseif ($text == "Register") {
         }elseif ($text == "Balance") {
         }
     }else{
-//    	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
+    	sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
     }
