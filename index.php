@@ -1,7 +1,9 @@
 <?php
     include('vendor/autoload.php'); //Подключаем библиотеку
+	require_once("func/function_agora.php");
     use Telegram\Bot\Api; 
 
+	$agora = new Agora;
     $telegram = new Api('5100938458:AAH71g8P2ROvg21YwKK6VLJ_02FPuk9yILY'); //Устанавливаем токен, полученный у BotFather
     $result = $telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
     
@@ -12,27 +14,22 @@
 
     if($text){
          if ($text == "/start") {
-            $reply = "Добро пожаловать в бота!";
+            $reply = "Welcome to the Bot";
             $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
         }elseif ($text == "/help") {
-            $reply = "Информация с помощью.";
+            $reply = "Help info";
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-        }elseif ($text == "Картинка") {
+        }elseif ($text == "price") {
+			$response = json_decode($agora->send_cmd("", "sell-bitcoins-online/USD/cryptocurrency"));
+			$reply=$response->data->ad_list[0]->data->temp_price;
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+        }elseif ($text == "Register") {
             $url = "https://68.media.tumblr.com/6d830b4f2c455f9cb6cd4ebe5011d2b8/tumblr_oj49kevkUz1v4bb1no1_500.jpg";
             $telegram->sendPhoto([ 'chat_id' => $chat_id, 'photo' => $url, 'caption' => "Описание." ]);
-        }elseif ($text == "Гифка") {
-            $url = "https://68.media.tumblr.com/bd08f2aa85a6eb8b7a9f4b07c0807d71/tumblr_ofrc94sG1e1sjmm5ao1_400.gif";
-            $telegram->sendDocument([ 'chat_id' => $chat_id, 'document' => $url, 'caption' => "Описание." ]);
-        }elseif ($text == "Последние статьи") {
-            $html=simplexml_load_file('http://netology.ru/blog/rss.xml');
-            foreach ($html->channel->item as $item) {
-	     $reply .= "\xE2\x9E\xA1 ".$item->title." (<a href='".$item->link."'>читать</a>)\n";
-        	}
-            $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode' => 'HTML', 'disable_web_page_preview' => true, 'text' => $reply ]);
-        }else{
-        	$reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
-        	$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply ]);
+        }elseif ($text == "Balance") {
+            $response = json_decode($agora->send_cmd("", "wallet-balance"));
+            $telegram->sendDocument([ 'chat_id' => $chat_id, 'text' => $response->data->total->balance ]);
         }
     }else{
     	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
