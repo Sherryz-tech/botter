@@ -30,10 +30,11 @@
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount? eg amount 0.5" ]);
         }elseif (substr($text,0,6) == "amount") {
 			$a=trim(strstr($text, " "));
+			$a=(int)$a;
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;
-			$amount=(int)$a-rand(0,1);
-            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount to pay_".$amount]);
+			$amount=$a-rand(0,1);
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount to pay_".$amount." ".var_dump($amount)]);
         }elseif ($text == "Register") {
             $url = "https://68.media.tumblr.com/6d830b4f2c455f9cb6cd4ebe5011d2b8/tumblr_oj49kevkUz1v4bb1no1_500.jpg";
             $telegram->sendPhoto([ 'chat_id' => $chat_id, 'photo' => $url, 'caption' => "Описание." ]);
