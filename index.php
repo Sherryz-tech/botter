@@ -11,7 +11,7 @@
 	//print_r($result);
     $text = $result["message"]["text"]; //Текст сообщения
     $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
-    $name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
+    $name = $result["message"]["chat"]["first_name"]; //Юзернейм пользователя
     $keyboard = [["Balance"], ["Wallet to pay"], ["Exchenge"]]; //Клавиатура
 
     if($text){
@@ -45,5 +45,5 @@
     }else{
     	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
     }
-	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $result]);
+	//$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $result]);
 ?>
