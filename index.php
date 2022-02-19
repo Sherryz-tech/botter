@@ -11,14 +11,17 @@
 	//print_r($result);
     $text = $result["message"]["text"]; //Текст сообщения
     $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
-    $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
+    $name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
     $keyboard = [["Balance"], ["Wallet to pay"], ["Exchenge"]]; //Клавиатура
 
     if($text){
          if ($text == "/start") {
-            $reply = "Welcome to the Bot $chat_id you a sign up";
+            $reply = "Welcome to the Bot $name you a sign up";
             $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
+        }elseif ($text == "/help") {
+            $reply = "Help info";
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Help']);
         }elseif ($text == "/help") {
             $reply = "Help info";
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Help']);
@@ -31,7 +34,7 @@
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
         }elseif ($text == "Exchenge") {
-            $answer = $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'How match?', 'reply_markup'=> $telegram->ForceReply(['force_reply' => true, 'selective'   => false])]);
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'How match?', 'reply_markup'=> $telegram->ForceReply(['force_reply' => true, 'selective'   => false])]);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "exchange ".$answer." BTC"]);
 		}elseif ($text == "Register") {
             $url = "https://68.media.tumblr.com/6d830b4f2c455f9cb6cd4ebe5011d2b8/tumblr_oj49kevkUz1v4bb1no1_500.jpg";
@@ -43,4 +46,7 @@
     }else{
     	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
     }
+	if (array_key_exists('reply_to_message', $result['message'])) {
+		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "exchange ".$text." BTC"]);
+	}
 ?>
