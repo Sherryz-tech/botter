@@ -45,5 +45,5 @@
     }else{
     	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
     }
-	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $result]);
+	
 ?>
