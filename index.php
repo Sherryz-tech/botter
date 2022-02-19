@@ -29,7 +29,7 @@
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount? eg amount 0.5" ]);
         }elseif (substr($text,0,6) == "amount") {
-			$a=strstr($text, " ");
+			$a=(int)strstr($text, " ");
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount to pay ".  $a]);
