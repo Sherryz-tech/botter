@@ -31,6 +31,7 @@ if(!file_exists("registered.trigger")){
 	 
 	// URl текущей страницы
 	$page_url = "https://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	echo $page_url;
 	$result = $bot->setWebhook($page_url);
 	if($result){
 		file_put_contents("registered.trigger",time()); // создаем файл дабы прекратить повторные регистрации
