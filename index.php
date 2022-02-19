@@ -28,7 +28,7 @@
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount? eg amount 0.5" ]);
-        }elseif ($text == "amount") {
+        }elseif (substr($text,0,6) == "amount") {
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply." amount? eg amount 0.5" ]);
