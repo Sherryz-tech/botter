@@ -45,8 +45,5 @@
     }else{
     	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
     }
-	if (array_key_exists('reply_to_message', $result['message'])) {
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "exchange ".$text." BTC"]);
-	}
 	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $result]);
 ?>
