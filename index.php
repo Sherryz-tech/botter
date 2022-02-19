@@ -28,10 +28,6 @@
 			$response = json_decode($agora->send_cmd("", "wallet-addr"));
 			$reply=$response->data->address;			
             $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
-        }elseif ($text == "Excange") {
-			$response = json_decode($agora->send_cmd("", "wallet-addr"));
-			$reply=$response->data->address;
-            $telegram->sendChatAction([ 'chat_id' => $chat_id, 'action' => "typing"]);
         }elseif ($text == "Register") {
             $url = "https://68.media.tumblr.com/6d830b4f2c455f9cb6cd4ebe5011d2b8/tumblr_oj49kevkUz1v4bb1no1_500.jpg";
             $telegram->sendPhoto([ 'chat_id' => $chat_id, 'photo' => $url, 'caption' => "Описание." ]);
