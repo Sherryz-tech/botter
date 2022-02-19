@@ -29,7 +29,7 @@
             $telegram->sendPhoto([ 'chat_id' => $chat_id, 'photo' => $url, 'caption' => "Описание." ]);
         }elseif ($text == "Balance") {
             $response = json_decode($agora->send_cmd("", "wallet-balance"));
-            $telegram->sendDocument([ 'chat_id' => $chat_id, 'text' => $response->data->total->balance ]);
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $response->data->total->balance ]);
         }
     }else{
     	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
